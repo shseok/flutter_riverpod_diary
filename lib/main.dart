@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'toast messgae',
+      title: 'initial page',
       home: MyPage(),
     );
   }
@@ -20,6 +20,11 @@ class MyPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(backgroundColor: Colors.pink[200]);
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('initial page'),
+        centerTitle: true,
+      ),
+    );
   }
 }
