@@ -8,6 +8,11 @@
   - restart 시도 해결 x
   - stop -> 재실행 해결!
 
+## rebuild 와 reload
+
+- reload: Text('sdfdsf') -> Text('h');
+- rebuild : state가 변경된 경우
+
 # Widget
 
 - Container
@@ -32,3 +37,7 @@
 ## Layout을 코드 확인 및 연습 예제 사이트
 
 [Flutter Layout Cheat Sheet](https://medium.com/flutter-community/flutter-layout-cheat-sheet-5363348d037e)
+
+# Deprecated -> change
+
+1. [Flutter 2.0 새로운 Material Buttons](https://seosh817.tistory.com/56)
