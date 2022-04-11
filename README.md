@@ -1,43 +1,29 @@
-# git checkout [브랜치명]
+# StatefulWidget이 rebuild되는 경우
 
-## 주의: 반드시 작업한 브랜치에서 commit하고 오기
+1. statelessWidget처럼 자식위젯의 생성자를 통해서 데이터가 전달 될 때
+2. Internal state가 바뀔 때
 
-# Error
+# StatefulWidget이 두개의 클래스로 이뤄져 있는 이유
 
-- MissingPluginException
-  - restart 시도 해결 x
-  - stop -> 재실행 해결!
+Widget클래스를 상속하고 있고 기본적으로 한번 생성되면 state가 변하지 않아 immutable합니다
 
-## rebuild 와 reload
+- 따라서, 단순히 StatefulWidget을 상속한다면 StatefulWidget일 수도 있고 Statelesswidget일 수도 있다
+- 하지만 StatefulWidget은 반드시 state의 변화를 반영해야기 때문에 두개의 클래스로 나뉘어
+  - extends StatefulWidget : immutable한 특징 유지
+  - extends State : mmutable한 속성 대신한다
+- 위 두가지를 연결해야한다.
+  - State의 generic type을 StatefulWidget을 상속한 클래스로 두어 연결시킨다.
 
-- reload: Text('sdfdsf') -> Text('h');
-- rebuild : state가 변경된 경우
+# Text위젯과 같이 StatelessWidget이 출력을 담당한다면
 
-# Widget
+StatelessWidget을 반드시 build method를 호출해서 위젯을 rebuild하는 방법밖에 없다
 
-- Container
+- 단순히 floatingActionButton을 누른다고 build method를 호출할 수 없다.
+  - 우리 대신, build method를 호출해줄 수 있는 setState method를 사용한다.
 
-  - 자식이 없을 경우 할 수 있는 최대한의 공간을 차지한다
-  - 자식을 가지게 되면 해당 자식의 크기로 줄어들게 된다.
+# setState
 
-- SafeWidget
+- 역할
 
-  - 개발자가 보여주고자하는 컨텐츠가 화면 밖으로 빠져나가지 않게 경계를 지정해주는 것
-    - Scaffold body에 바로 적용하면 위의 statusbar와 겹치지 않게 해줌
-
-- Center
-
-  - button 위젯 같은 작은 위젯의 경우 상하 좌우 기준으로 정렬해준다.
-  - 하지만, Column같은 경우 children의 좌우에 따르지만 상하는 가능한 최대를 차지하므로 Center의 상하 통제권일 없어진다. 이경우 Column내부에서 조정해줘야한다
-
-- Column
-  - mainAxisSize: MainAxisSize.min
-    - Column위젯이 세로축의 공간을 차지하지 않길 원할 때
-
-## Layout을 코드 확인 및 연습 예제 사이트
-
-[Flutter Layout Cheat Sheet](https://medium.com/flutter-community/flutter-layout-cheat-sheet-5363348d037e)
-
-# Deprecated -> change
-
-1. [Flutter 2.0 새로운 Material Buttons](https://seosh817.tistory.com/56)
+  1. 매게변수로 전달된 함수를 호출한다.
+  2. build method를 호출한다
