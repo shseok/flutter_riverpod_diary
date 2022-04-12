@@ -15,6 +15,11 @@
 
 # Widget
 
+- Scaffold
+
+  - 위에서 바로 floatingActionButton을 사용하고 싶다면 `floatingActionButton : FloatingActionButton(~~~~)` : constructor에 변수를 선언해줘야한다
+    - 하지만, Column내 children에서 쓰인다면 children는 widget을 바로 사용할 수 있으므로 `FloatingActionButton(~~~~)`
+
 - Container
 
   - 자식이 없을 경우 할 수 있는 최대한의 공간을 차지한다
@@ -41,3 +46,21 @@
 # Deprecated -> change
 
 1. [Flutter 2.0 새로운 Material Buttons](https://seosh817.tistory.com/56)
+
+# git clone 이후 빨간줄이 여러개 보일 시 flutter packages get
+
+= flutter pub get
+
+# 키보드사용시 요소의 영역 침범시 해결
+
+SingleChildView
+
+# ButtonTheme
+
+좀더 편하게 버튼의 크 등을 설정 가능
+
+- MaterialButton 또한 존재
+
+# EelevatedButton style 방법
+
+[How to change background color of Elevated Button in Flutter from function?](https://stackoverflow.com/questions/66835173/how-to-change-background-color-of-elevated-button-in-flutter-from-function)
