@@ -53,7 +53,9 @@
 
 # 키보드사용시 요소의 영역 침범시 해결
 
-SingleChildView
+SingleChildView 위젯 사용
+
+- 키보드가 밀고 올라와서 차지한 스크린만큼을 스크린 화면이 스크롤 될 수 있도록 만들어주는 위젯
 
 # ButtonTheme
 
@@ -64,3 +66,7 @@ SingleChildView
 # EelevatedButton style 방법
 
 [How to change background color of Elevated Button in Flutter from function?](https://stackoverflow.com/questions/66835173/how-to-change-background-color-of-elevated-button-in-flutter-from-function)
+
+# TextEditingController의 이용
+
+# 페이지 이동과 snackbar
