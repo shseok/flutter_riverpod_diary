@@ -70,3 +70,19 @@ SingleChildView 위젯 사용
 # TextEditingController의 이용
 
 # 페이지 이동과 snackbar
+
+- Snacbar 구현시 Scaffold.of(deprecated) VS ScaffoldMessenger.of
+  - [도움](https://bacha.tistory.com/47)
+
+# Focus
+
+- FocusNode: 포커스를 받는 특정 위젯 식별
+- FocusScope: 어떤 위젯들까지 포커스를 받을 수 있는지 범위를 나타냄
+
+# BuildContext
+
+위젯의 build함수는 Scaffold 위젯을 반환하는데 이때, 위젯트리상에서 어디에 위치해 있는가의 정보를 넣어 return
+
+# something.of(context)의 의미는? 다시공부하기
+
+현재 주어진 context에서 위로 올라가면서 가장 가까운 something을 찾아 반환해라
