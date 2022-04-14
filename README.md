@@ -41,3 +41,10 @@
 # Deprecated -> change
 
 1. [Flutter 2.0 새로운 Material Buttons](https://seosh817.tistory.com/56)
+
+# Future
+
+일종의 약속이다. (= promise)
+
+- 결과물인 실제 객체가 리턴된다.
+- `Future<String>`는 실체가 없지만 이후 String이 return 됨
