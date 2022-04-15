@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_prac/data/my_location.dart';
+import 'package:flutter_prac/data/network.dart';
+import 'package:flutter_prac/screens/weather_screen.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+
+const apiKey = '8956debb3725873aa29cca6628a27a28';
 
 class Loading extends StatefulWidget {
   const Loading({Key? key}) : super(key: key);
@@ -13,22 +16,27 @@ class Loading extends StatefulWidget {
 class _LoadingState extends State<Loading> {
 
   @override
-  void initState() { // Loading statefulWidget 생성시 한번만 실행되는 메소드
+  void initState() {
+    // Loading statefulWidget 생성시 한번만 실행되는 메소드
     // TODO: implement initState
     super.initState();
     fetchData();
   }
 
-  void fetchData() async{
-    http.Response response = await http.get(Uri.parse('https://samples.openweathermap.org/data/2.5/weather?q=London&appid=b1b15e88fa797225412429c1c50c122a1'));
-    if(response.statusCode == 200){
-      String jsonData = response.body;
-      var myJson = jsonDecode(jsonData);
-      // print(jsonData['weather'][0]['description']);
-      print(myJson);
-      print(myJson['weather'][0]['description']);
 
-    }
+  void fetchData() async{
+    MyLocation myLocation = MyLocation();
+    await myLocation.getLocation();
+      // print(jsonData['weather'][0]['description']);
+      // print(myJson['weather'][0]['description']);
+    NetWork netWork = NetWork('https://api.openweathermap.org/data/2.5/weather?lat=${myLocation
+        .latitude2}&lon=${myLocation.logitude2}&appid=$apiKey&units=metric');
+
+    var weatherData = await netWork.getJsonData();
+    // print(weatherData);
+    Navigator.push(context, MaterialPageRoute(builder: (context){
+      return WeatherScreen(parseWeatherData: weatherData,);
+    }));
   }
 
   @override
