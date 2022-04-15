@@ -59,7 +59,9 @@ Future<Info> fetchInfo() async {
 
   if (response.statusCode == 200) {
     // http 상태 정상 / 서버측 요청 정상처리
-    return Info.fromJson(json.decode(response.body));
+    print(response.body); // json.decode = jsonDecode
+    print(jsonDecode(response.body));
+    return Info.fromJson(json.decode(response.body)[0]);
   } else {
     throw Exception('실패했습니다.');
   }
