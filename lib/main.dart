@@ -9,7 +9,7 @@ void main() => runApp(MyApp(info: fetchInfo()));
 
 class MyApp extends StatelessWidget {
   final Future<Info> info;
-  const MyApp({required this.info});
+  const MyApp({required this.info, Key? key}): super(key:key);
 
   @override
   Widget build(BuildContext context) {
