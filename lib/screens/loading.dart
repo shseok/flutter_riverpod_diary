@@ -14,7 +14,6 @@ class Loading extends StatefulWidget {
 }
 
 class _LoadingState extends State<Loading> {
-
   @override
   void initState() {
     // Loading statefulWidget 생성시 한번만 실행되는 메소드
@@ -23,19 +22,24 @@ class _LoadingState extends State<Loading> {
     fetchData();
   }
 
-
-  void fetchData() async{
+  void fetchData() async {
     MyLocation myLocation = MyLocation();
     await myLocation.getLocation();
-      // print(jsonData['weather'][0]['description']);
-      // print(myJson['weather'][0]['description']);
-    NetWork netWork = NetWork('https://api.openweathermap.org/data/2.5/weather?lat=${myLocation
-        .latitude2}&lon=${myLocation.logitude2}&appid=$apiKey&units=metric');
+    // print(jsonData['weather'][0]['description']);
+    // print(myJson['weather'][0]['description']);
+    NetWork netWork = NetWork(
+        'https://api.openweathermap.org/data/2.5/weather?lat=${myLocation.latitude2}&lon=${myLocation.logitude2}&appid=$apiKey&units=metric',
+        'https://api.openweathermap.org/data/2.5/air_pollution?lat=${myLocation.latitude2}&lon=${myLocation.logitude2}&appid=$apiKey');
 
     var weatherData = await netWork.getJsonData();
-    // print(weatherData);
-    Navigator.push(context, MaterialPageRoute(builder: (context){
-      return WeatherScreen(parseWeatherData: weatherData,);
+    print(weatherData);
+    var airData = await netWork.getAirData();
+    print(airData);
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return WeatherScreen(
+        parseWeatherData: weatherData,
+        parseAirPollution: airData,
+      );
     }));
   }
 
