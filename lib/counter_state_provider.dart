@@ -15,14 +15,15 @@ class CounterStateProvider extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final counter = ref.watch(counterStateProvider.state);
+    // final counter = ref.watch(counterStateProvider);
+    final counter = ref.watch(counterStateProvider.state).state;
     return Scaffold(
         appBar: AppBar(
           title: Text('StateProvider'),
         ),
         body: Center(
           child: Text(
-            '${counter.state}',
+            '${counter}',
             style: TextStyle(fontSize: 60, fontWeight: FontWeight.bold),
           ),
         ),

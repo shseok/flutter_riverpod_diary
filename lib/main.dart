@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart'; // 기본 내장
+import 'package:flutter_prac/counter_state_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'counter_state_provider.dart';
@@ -44,7 +45,18 @@ class MyPage extends StatelessWidget {
                     );
                   },
                   child:
-                      Text('StateProvider', style: TextStyle(fontSize: 18.0)))
+                      Text('StateProvider', style: TextStyle(fontSize: 18.0))),
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) {
+                        return CounterStateNotifier();
+                      }),
+                    );
+                  },
+                  child:
+                  Text('StateNotifierProvider', style: TextStyle(fontSize: 18.0)))
             ],
           ),
         ));
