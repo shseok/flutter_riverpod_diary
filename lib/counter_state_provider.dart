@@ -22,10 +22,16 @@ class CounterStateProvider extends ConsumerWidget {
           title: Text('StateProvider'),
         ),
         body: Center(
-          child: Text(
-            '${counter}',
-            style: TextStyle(fontSize: 60, fontWeight: FontWeight.bold),
-          ),
+          // child: Text(
+          //   '${counter}',
+          //   style: TextStyle(fontSize: 60, fontWeight: FontWeight.bold),
+          // ),
+          // Consumer is a widget that allows you reading providers.
+          child: Consumer(builder: (context, ref, child){
+            final count = ref.watch(counterStateProvider.state).state++;
+            return Text('$count');
+          },)
+
         ),
       floatingActionButton: Align(
         alignment: Alignment.bottomRight,
@@ -35,6 +41,7 @@ class CounterStateProvider extends ConsumerWidget {
             FloatingActionButton(
               child: Icon(Icons.add),
               onPressed: () => {
+                // The read method is a utility to read a provider without listening to it
                 ref.read(counterStateProvider.state).state++
               },
               heroTag: null,

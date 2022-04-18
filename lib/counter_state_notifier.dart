@@ -5,9 +5,7 @@ class MyCounter extends StateNotifier<int> {
   MyCounter() : super(0);
 
   void increment() => state++;
-
   void decrement() => state--;
-
   void initCount() => state = 0;
 }
 
