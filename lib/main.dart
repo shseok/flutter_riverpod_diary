@@ -5,6 +5,7 @@ import 'package:flutter_prac/ui/item_widget.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_prac/ui/title_widget.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 /// Some keys used for testing
 final addTodoKey = UniqueKey();
@@ -39,7 +40,7 @@ class MyPage extends HookConsumerWidget {
         onTap: () => FocusScope.of(context).unfocus(),
         child: Scaffold(
             appBar: AppBar(
-              title: Text('My Plan'),
+              title: Text('My Plan', style: GoogleFonts.getFont('Lato',textStyle: TextStyle(fontSize: 20.0))),
               centerTitle: true,
             ),
             body: ListView(
@@ -47,6 +48,26 @@ class MyPage extends HookConsumerWidget {
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
                 children: [
                   // TitleWidget(),
+                  // const SizedBox(height: 42),
+                  Toolbar(),
+                  const SizedBox(height: 19),
+                  // if (todos.isNotEmpty) const Divider(height: 50),
+                  for (var i = 0; i < todos.length; i++) ...[
+                    if (i > 0) const SizedBox(height: 5),
+                        Dismissible(
+                          key: ValueKey(todos[i].id),
+                          onDismissed: (_) {
+                            // print(ref.read(todoListProvider.notifier).runtimeType);
+                            ref.read(todoListProvider.notifier).remove(todos[i]);
+                          },
+                          child: ProviderScope(
+                            overrides: [
+                              currentTodo.overrideWithValue(todos[i]),
+                            ],
+                            child: const TodoItem(),
+                          ),
+                        ),
+                  ],
                   TextField(
                     key: addTodoKey,
                     controller: newTodoController,
@@ -58,24 +79,6 @@ class MyPage extends HookConsumerWidget {
                       newTodoController.clear();
                     },
                   ),
-                  const SizedBox(height: 42),
-                  Toolbar(),
-                  if (todos.isNotEmpty) const Divider(height: 0),
-                  for (var i = 0; i < todos.length; i++) ...[
-                    if (i > 0) const Divider(height: 0),
-                    Dismissible(
-                      key: ValueKey(todos[i].id),
-                      onDismissed: (_) {
-                        ref.read(todoListProvider.notifier).remove(todos[i]);
-                      },
-                      child: ProviderScope(
-                        overrides: [
-                          currentTodo.overrideWithValue(todos[i]),
-                        ],
-                        child: const TodoItem(),
-                      ),
-                    )
-                  ]
                 ]
             ),
         )
