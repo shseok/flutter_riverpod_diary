@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart'; // 기본 내장
 import 'package:flutter_prac/provider/todo_provider.dart';
 import 'package:flutter_prac/ui/filter_widget.dart';
+import 'package:flutter_prac/ui/floating_button_widget.dart';
 import 'package:flutter_prac/ui/item_widget.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:flutter_prac/ui/title_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 /// Some keys used for testing
@@ -29,7 +29,11 @@ class MyApp extends StatelessWidget {
 }
 
 class MyPage extends HookConsumerWidget {
-  const MyPage({Key? key}) : super(key: key);
+
+  MyPage({Key? key}) : super(key: key);
+
+  ValueNotifier<bool> isDialOpen = ValueNotifier(false);
+  var rmicons = false;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -81,6 +85,7 @@ class MyPage extends HookConsumerWidget {
                   ),
                 ]
             ),
+          floatingActionButton: myFloatingActionButtonWidget(isDialOpen: isDialOpen, rmicons: rmicons,),
         )
     );
   }
