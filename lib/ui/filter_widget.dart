@@ -24,8 +24,8 @@ class Toolbar extends HookConsumerWidget {
     return Material(
       child: Container(
         // color: Colors.red,
-        width: double.infinity,
         height: 60.0,
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,

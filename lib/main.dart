@@ -48,43 +48,52 @@ class MyPage extends HookConsumerWidget {
               centerTitle: true,
             ),
             body: ListView(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
-                children: [
-                  // TitleWidget(),
-                  // const SizedBox(height: 42),
-                  Toolbar(),
-                  const SizedBox(height: 19),
-                  // if (todos.isNotEmpty) const Divider(height: 50),
-                  for (var i = 0; i < todos.length; i++) ...[
-                    if (i > 0) const SizedBox(height: 5),
-                        Dismissible(
-                          key: ValueKey(todos[i].id),
-                          onDismissed: (_) {
-                            // print(ref.read(todoListProvider.notifier).runtimeType);
-                            ref.read(todoListProvider.notifier).remove(todos[i]);
-                          },
-                          child: ProviderScope(
-                            overrides: [
-                              currentTodo.overrideWithValue(todos[i]),
-                            ],
-                            child: const TodoItem(),
-                          ),
-                        ),
-                  ],
-                  TextField(
-                    key: addTodoKey,
-                    controller: newTodoController,
-                    decoration: const InputDecoration(
-                      labelText: '추가하기',
+                  children: [
+                    // 달력 위치 (title_widget.dart에 넣기)
+                    // const SizedBox(height: 42),
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 120.0,
+                      color: Color(0xffA876DE),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [Text('00:00:00', style: TextStyle(fontSize: 60.0, color: Colors.white))],
+                      ),
                     ),
-                    onSubmitted: (value) {
-                      ref.read(todoListProvider.notifier).add(value);
-                      newTodoController.clear();
-                    },
-                  ),
-                ]
-            ),
+                    const SizedBox(height: 10),
+                    Toolbar(),
+                    const SizedBox(height: 19),
+                    // if (todos.isNotEmpty) const Divider(height: 50),
+                    for (var i = 0; i < todos.length; i++) ...[
+                      if (i > 0) const SizedBox(height: 5),
+                          Dismissible(
+                            key: ValueKey(todos[i].id),
+                            onDismissed: (_) {
+                              // print(ref.read(todoListProvider.notifier).runtimeType);
+                              ref.read(todoListProvider.notifier).remove(todos[i]);
+                            },
+                            child: ProviderScope(
+                              overrides: [
+                                currentTodo.overrideWithValue(todos[i]),
+                              ],
+                              child: const TodoItem(),
+                            ),
+                          ),
+                    ],
+                    TextField(
+                      key: addTodoKey,
+                      controller: newTodoController,
+                      decoration: const InputDecoration(
+                        labelText: '추가하기',
+                      ),
+                      onSubmitted: (value) {
+                        ref.read(todoListProvider.notifier).add(value);
+                        newTodoController.clear();
+                      },
+                    ),
+                  ]
+              ),
           floatingActionButton: myFloatingActionButtonWidget(isDialOpen: isDialOpen, rmicons: rmicons,),
         )
     );

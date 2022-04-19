@@ -19,6 +19,7 @@ class TodoItem extends HookConsumerWidget {
 
     return Container(
       width: double.infinity,
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
       child: Row(
         children: [
           Expanded(

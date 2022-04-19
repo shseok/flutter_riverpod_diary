@@ -13,6 +13,8 @@ class myFloatingActionButtonWidget extends StatefulWidget {
 
 class _myFloatingActionButtonWidgetState extends State<myFloatingActionButtonWidget> {
 
+  final _formKey = GlobalKey<FormState>();
+  
   @override
   Widget build(BuildContext context) {
     return SpeedDial(
@@ -36,34 +38,28 @@ class _myFloatingActionButtonWidgetState extends State<myFloatingActionButtonWid
       overlayOpacity: 0.5,
       children: [
         SpeedDialChild(
-          child: !widget.rmicons
-              ? const Icon(
+          child: const Icon(
             Icons.post_add,
-          )
-              : null,
+          ),
           backgroundColor: Colors.white,
           // foregroundColor: Colors.white,
           label: '추가',
-          onTap: () => setState(() => widget.rmicons = !widget.rmicons),
+          onTap: () => setState(() => _AddForm(context, _formKey)),
           onLongPress: () => debugPrint('FIRST CHILD LONG PRESS'),
         ),
         SpeedDialChild(
-          child: !widget.rmicons
-              ? const Icon(
+          child: const Icon(
             Icons.delete_outline,
-          )
-              : null,
+          ),
           backgroundColor: Colors.white,
           // foregroundColor: Colors.white,
           label: '삭제',
           onTap: () => debugPrint('SECOND CHILD'),
         ),
         SpeedDialChild(
-          child: !widget.rmicons
-              ? const Icon(
+          child: const Icon(
             Icons.edit_note,
-          )
-              : null,
+          ),
           backgroundColor: Colors.white,
           // foregroundColor: Colors.white,
           label: '수정',
@@ -75,4 +71,58 @@ class _myFloatingActionButtonWidgetState extends State<myFloatingActionButtonWid
       ],
     );
   }
+}
+
+void _AddForm(BuildContext context, GlobalKey<FormState> formKey) {
+  showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Stack(
+            overflow: Overflow.visible,
+            children: <Widget>[
+              Positioned(
+                right: -40.0,
+                top: -40.0,
+                child: InkResponse(
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: CircleAvatar(
+                    child: Icon(Icons.close),
+                    backgroundColor: Colors.red,
+                  ),
+                ),
+              ),
+              Form(
+                key: formKey,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: TextFormField(),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: TextFormField(),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ElevatedButton(
+                        child: Text("제출"),
+                        onPressed: () {
+                          if (formKey.currentState!.validate()) {
+                            formKey.currentState!.save();
+                          }
+                        },
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
+      });
 }
