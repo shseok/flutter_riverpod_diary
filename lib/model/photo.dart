@@ -7,18 +7,29 @@ class Photo {
 
   Photo({this.albumId, this.id, this.title, this.url, this.thumbnailUrl});
 
-  Photo.fromJson(dynamic json) {
+  // // Photo.fromJson(dynamic json) {
   // Photo.fromJson(Map<String, dynamic> json) {
-    albumId = json['albumId'];
-    id = json['id'];
-    title = json['title'];
-    url = json['url'];
-    thumbnailUrl = json['thumbnailUrl'];
+  //   albumId = json['albumId'];
+  //   id = json['id'];
+  //   title = json['title'];
+  //   url = json['url'];
+  //   thumbnailUrl = json['thumbnailUrl'];
+  // }
+
+  factory Photo.fromJson(Map<String, dynamic> json) {
+    return Photo(
+      albumId: json['albumId'],
+      id: json['id'],
+      title: json['title'],
+      url: json['url'],
+      thumbnailUrl: json['thumbnailUrl'],
+    );
   }
 
+
   Map<String, dynamic> toJson() {
-    // final Map<String, dynamic> data = new Map<String, dynamic>();
-    final data = <String, dynamic>{};
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    // final data = <String, dynamic>{};
     data['albumId'] = this.albumId;
     data['id'] = this.id;
     data['title'] = this.title;
