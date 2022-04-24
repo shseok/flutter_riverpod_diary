@@ -1,30 +1,20 @@
-import 'package:flutter/material.dart'; // 기본 내장
+import 'package:flutter/material.dart';
+import 'package:flutter_prac/screens/home.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-// 등록 후 내장
-void main() => runApp(MyApp());
+void main() => runApp(ProviderScope(child: MyApp()));
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'initial page',
-      home: MyPage(),
-    );
-  }
-}
-
-class MyPage extends StatelessWidget {
-  const MyPage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('initial page'),
-        centerTitle: true,
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        appBarTheme: AppBarTheme(color: Color(0xFF064479)),
+        primaryColor: Color(0xFF064479),
+        backgroundColor: Color(0xFFb7eeff),
       ),
+      home: Home(),
     );
   }
 }
